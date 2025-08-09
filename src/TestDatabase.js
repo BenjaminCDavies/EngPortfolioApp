@@ -4,10 +4,11 @@ import { supabase } from './supabaseClient';
 function TestDatabase() {
   const [data, setData] = useState([]);
 
-  
   useEffect(() => {
     async function fetchData() {
-      const { data, error } = await supabase.from('test').select('*');
+      const { data, error } = await supabase
+      .from('test')
+      .select('*');
       if (error) {
         console.error('Error fetching data:', error);
       } else {
