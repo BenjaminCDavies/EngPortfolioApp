@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from './supabaseClient';
 import "./ProfilePage.css";
+import "./Navbar.css";
 import logo from './logo.svg';
 
 function ProfilePage() {
@@ -36,7 +37,18 @@ function ProfilePage() {
     }
 
   return (
-    <div className="profile-container">
+    <div>
+      {/* navbar */}
+      <nav className="navbar">
+        <a href="/profile">Profile</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/goals">Goals</a>
+        <a href="/networking">Networking</a>
+        <a href="/competencies">Competencies</a>
+        <a href="/cdl">CDL</a>
+      </nav>
+
+      <div className="profile-container">
       <div className="profile-card">
         
         {/* header section */}
@@ -78,6 +90,7 @@ function ProfilePage() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
