@@ -26,6 +26,7 @@ function ProfilePage() {
         setLoading(false);
         }
         fetchData();
+        
     }, []);
     console.log(data);
 
