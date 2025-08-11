@@ -11,25 +11,41 @@ function ProfilePage() {
                                                      that contain data until it arrives */
 
     useEffect(() => {
-        async function fetchData() {
-            const { data, error } = await supabase
-            .from('test')
-            .select('*')
-            .eq('id', '2'); /* grab all data where the id matches */
+      async function fetchData() {
+        // get the logged-in user
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
 
-            if (error) {
-                console.error('Error fetching data:', error);
-                setLoading(false);
-                return;
-            }
-
-        setData(data);
-        setLoading(false);
+        if (userError) {
+          console.error("Error fetching user:", userError);
+          setLoading(false);
+          return;
         }
-        fetchData();
-        
+
+        if (!user) {
+          console.error("No logged-in user");
+          setLoading(false);
+          return;
+        }
+
+        // query test table where user_id matches auth user's id
+        const { data: profile, error: profileError } = await supabase
+          .from("test")
+          .select("*")
+          .eq("user_id", user.id) // this is the foreign key
+          .single(); // expects one row
+
+        if (profileError) {
+          console.error("Error fetching profile:", profileError);
+          setLoading(false);
+          return;
+        }
+
+        setData(profile);
+        setLoading(false);
+      }
+
+      fetchData();
     }, []);
-    console.log(data);
 
     /* display loading until data comes */
     if(loading) {
@@ -50,8 +66,8 @@ function ProfilePage() {
             className="profile-image"
           />
           <div className="profile-info">
-            <h1 className="profile-name">{data[0].first_name} {data[0].last_name}</h1>
-            <p className="profile-course">{data[0].course}</p>
+            <h1 className="profile-name">{data.first_name} {data.last_name}</h1>
+            <p className="profile-course">{data.course}</p>
           </div>
         </div>
 
@@ -61,7 +77,7 @@ function ProfilePage() {
           {/* elevator pitch */}
           <div className="profile-section pitch">
             <h2 className="section-title">Elevator Pitch</h2>
-            <p className="section-text">{data[0].elevator_pitch}</p>
+            <p className="section-text">{data.elevator_pitch}</p>
           </div>
 
           {/* upcoming actions */}
@@ -77,7 +93,7 @@ function ProfilePage() {
           {/* personal introduction */}
           <div className="profile-section intro">
             <h2 className="section-title">Personal Introduction</h2>
-            <p className="section-text">{data[0].personal_introduction}</p>
+            <p className="section-text">{data.personal_introduction}</p>
           </div>
         </div>
       </div>
