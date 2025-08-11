@@ -16,3 +16,11 @@
 .navbar a:hover {
     background-color: #575757;
 }
+
+/* stop navbar from scrolling with page */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
