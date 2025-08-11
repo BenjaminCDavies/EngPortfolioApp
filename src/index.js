@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './index.css';
 import Layout from './layout/Layout'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import DashboardPage from './pages/DashboardPage/DashboardPage'
+import LoginPage from './pages/Authentication/LoginPage'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,8 +15,12 @@ root.render(
     <Router>
       <Layout>
         <Routes>
+
+          {/* default to the profile page */}
+          <Route path="/" element={<Navigate to="/profile" replace />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Layout>
     </Router>
