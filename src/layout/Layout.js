@@ -1,12 +1,20 @@
 import Navbar from '../components/Navbar/Navbar';
+import { useAuth } from '../context/AuthContext';
 
 function Layout({ children }) {
-    return (
-        <div>
-            <Navbar />
-            <main>{children}</main>
-        </div>
-    );
+  const { user, loading } = useAuth();
+
+  if (loading) return null;
+
+  return (
+    <>
+      {user && <Navbar />}  {/* only show navbar if logged in */}
+      <main style={{ marginTop: user ? '50px' : '0' }}>
+        {children}
+      </main>
+    </>
+  );
 }
 
-export default Layout
+export default Layout;
+
