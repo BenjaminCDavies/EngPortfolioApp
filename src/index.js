@@ -6,25 +6,46 @@ import Layout from './layout/Layout'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import DashboardPage from './pages/DashboardPage/DashboardPage'
 import LoginPage from './pages/Authentication/LoginPage'
+import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider } from './context/AuthContext';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <Layout>
-        <Routes>
+    <AuthProvider>
+      <Router>
+        <Layout>
+          <Routes>
 
-          {/* default to the profile page */}
-          <Route path="/" element={<Navigate to="/profile" replace />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/login" element={<LoginPage />} />
-        </Routes>
-      </Layout>
-    </Router>
+            {/* default to the profile page */}
+            <Route path="/" element={<Navigate to="/profile" replace />} />
 
+            {/* protected routes */}
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* public route */}
+            <Route path="/login" element={<LoginPage />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </AuthProvider>
   </React.StrictMode>
 );
 
