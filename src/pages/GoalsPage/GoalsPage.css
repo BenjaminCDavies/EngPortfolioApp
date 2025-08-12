@@ -1,0 +1,62 @@
+.goals-sections {
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+}
+
+.goal-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  padding: 16px;
+}
+
+.goal-section {
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.smart-goal {
+  background-color: #eef2ff;
+}
+
+.action-steps {
+  background-color: #ecfdf5;
+}
+
+.timeline {
+  background-color: #fefce8;
+}
+
+.progress-notes {
+  background-color: #f0f9ff;
+}
+
+.key-learnings {
+  background-color: #fff1f2;
+}
+
+.goal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.edit-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.delete-link {
+  color: #dc2626;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.edit-link:hover,
+.delete-link:hover {
+  text-decoration: underline;
+}

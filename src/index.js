@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './index.css';
-import Layout from './layout/Layout'
-import ProfilePage from './pages/ProfilePage/ProfilePage'
-import DashboardPage from './pages/DashboardPage/DashboardPage'
-import LoginPage from './pages/Authentication/LoginPage'
+import Layout from './layout/Layout';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
+import DashboardPage from './pages/DashboardPage/DashboardPage';
+import LoginPage from './pages/Authentication/LoginPage';
+import GoalsPage from './pages/GoalsPage/GoalsPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import reportWebVitals from './reportWebVitals';
@@ -36,6 +37,14 @@ root.render(
               element={
                 <ProtectedRoute>
                   <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/goals"
+              element={
+                <ProtectedRoute>
+                  <GoalsPage />
                 </ProtectedRoute>
               }
             />
