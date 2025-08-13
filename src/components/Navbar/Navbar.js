@@ -5,6 +5,7 @@ import './Navbar.css'
 function Navbar() {
   const navigate = useNavigate();
 
+  // log user out and remove authentication tokens
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate('/login');
